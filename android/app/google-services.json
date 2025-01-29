@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "110207229566",
+    "project_id": "traumakompass",
+    "storage_bucket": "traumakompass.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:110207229566:android:96d3146b3a1538a3db022f",
+        "android_client_info": {
+          "package_name": "com.mycompany.trauma"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwaZ5PgPpjtJXwvQRNQvI_dSri3ImG1Kk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:110207229566:android:3809a82db6d65d31db022f",
+        "android_client_info": {
+          "package_name": "com.mycompany.traumakompass"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwaZ5PgPpjtJXwvQRNQvI_dSri3ImG1Kk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
