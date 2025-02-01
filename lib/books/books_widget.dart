@@ -21,6 +21,8 @@ class _BooksWidgetState extends State<BooksWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => BooksModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -91,39 +93,64 @@ class _BooksWidgetState extends State<BooksWidget> {
                     decoration: BoxDecoration(
                       color: FlutterFlowTheme.of(context).secondaryBackground,
                     ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Text(
-                          listViewBookRecord.bookName,
-                          style:
-                              FlutterFlowTheme.of(context).bodyMedium.override(
-                                    fontFamily: 'Inter',
-                                    letterSpacing: 0.0,
-                                  ),
-                        ),
-                        Text(
-                          listViewBookRecord.bookPath,
-                          style:
-                              FlutterFlowTheme.of(context).bodyMedium.override(
-                                    fontFamily: 'Inter',
-                                    letterSpacing: 0.0,
-                                  ),
-                        ),
-                        ClipRRect(
-                          key: const ValueKey(
-                              'https://drive.google.com/drive/folders/1wZKLN0-D96a1WdlSTnA-wjhRqYzgq58P?dmr=1&ec=wgc-drive-globalnav-goto'),
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: Image.network(
-                            key: const ValueKey(
-                                'https://drive.google.com/drive/folders/1wZKLN0-D96a1WdlSTnA-wjhRqYzgq58P?dmr=1&ec=wgc-drive-globalnav-goto'),
-                            listViewBookRecord.bookURL,
-                            width: 81.86,
-                            height: 85.6,
-                            fit: BoxFit.cover,
+                    child: InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () async {
+                        context.pushNamed(
+                          'BookEdit',
+                          queryParameters: {
+                            'bookPath': serializeParam(
+                              listViewBookRecord.bookPath,
+                              ParamType.String,
+                            ),
+                            'bookName': serializeParam(
+                              listViewBookRecord.bookName,
+                              ParamType.String,
+                            ),
+                            'bookURL': serializeParam(
+                              listViewBookRecord.reference.id,
+                              ParamType.String,
+                            ),
+                          }.withoutNulls,
+                        );
+                      },
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Align(
+                            alignment: const AlignmentDirectional(-1.0, 0.0),
+                            child: ClipRRect(
+                              key: const ValueKey(
+                                  'https://drive.google.com/drive/folders/1wZKLN0-D96a1WdlSTnA-wjhRqYzgq58P?dmr=1&ec=wgc-drive-globalnav-goto'),
+                              borderRadius: BorderRadius.circular(8.0),
+                              child: Image.network(
+                                key: const ValueKey(
+                                    'https://drive.google.com/drive/folders/1wZKLN0-D96a1WdlSTnA-wjhRqYzgq58P?dmr=1&ec=wgc-drive-globalnav-goto'),
+                                listViewBookRecord.bookURL,
+                                width: 81.9,
+                                height: 85.6,
+                                fit: BoxFit.fill,
+                              ),
+                            ),
                           ),
-                        ),
-                      ],
+                          Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                20.0, 0.0, 0.0, 0.0),
+                            child: Text(
+                              listViewBookRecord.bookName,
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'Inter',
+                                    letterSpacing: 0.0,
+                                  ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   );
                 },

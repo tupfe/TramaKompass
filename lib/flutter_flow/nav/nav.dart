@@ -92,6 +92,29 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'Login',
           path: '/login',
           builder: (context, params) => const LoginWidget(),
+        ),
+        FFRoute(
+          name: 'BookEdit',
+          path: '/bookEdit',
+          builder: (context, params) => BookEditWidget(
+            bookPath: params.getParam(
+              'bookPath',
+              ParamType.String,
+            ),
+            bookName: params.getParam(
+              'bookName',
+              ParamType.String,
+            ),
+            bookURL: params.getParam(
+              'bookURL',
+              ParamType.String,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'Checkout6',
+          path: '/checkout6',
+          builder: (context, params) => const Checkout6Widget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
