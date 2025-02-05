@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -14,8 +13,8 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../main.dart';
 
+import 'package:ff_commons/flutter_flow/lat_lng.dart';
 
-export 'keep_alive_wrapper.dart';
 export 'package:ff_commons/flutter_flow/lat_lng.dart';
 export 'package:ff_commons/flutter_flow/place.dart';
 export 'package:ff_commons/flutter_flow/uploaded_file.dart';
@@ -24,8 +23,6 @@ export 'dart:math' show min, max;
 export 'dart:typed_data' show Uint8List;
 export 'dart:convert' show jsonEncode, jsonDecode;
 export 'package:intl/intl.dart';
-export 'package:cloud_firestore/cloud_firestore.dart'
-    show DocumentReference, FirebaseFirestore;
 export 'package:page_transition/page_transition.dart';
 export 'nav/nav.dart';
 
@@ -268,10 +265,6 @@ extension IterableExt<T> on Iterable<T> {
       .toList();
 }
 
-extension StringDocRef on String {
-  DocumentReference get ref => FirebaseFirestore.instance.doc(this);
-}
-
 void setDarkModeSetting(BuildContext context, ThemeMode themeMode) =>
     MyApp.of(context).setThemeMode(themeMode);
 
@@ -287,12 +280,12 @@ void showSnackbar(
       content: Row(
         children: [
           if (loading)
-            const Padding(
+            Padding(
               padding: EdgeInsetsDirectional.only(end: 10.0),
-              child: SizedBox(
+              child: Container(
                 height: 20,
                 width: 20,
-                child: CircularProgressIndicator(
+                child: const CircularProgressIndicator(
                   color: Colors.white,
                 ),
               ),

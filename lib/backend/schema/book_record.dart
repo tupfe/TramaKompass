@@ -30,10 +30,22 @@ class BookRecord extends FirestoreRecord {
   String get bookURL => _bookURL ?? '';
   bool hasBookURL() => _bookURL != null;
 
+  // "BookContent" field.
+  String? _bookContent;
+  String get bookContent => _bookContent ?? '';
+  bool hasBookContent() => _bookContent != null;
+
+  // "BookHeader" field.
+  String? _bookHeader;
+  String get bookHeader => _bookHeader ?? '';
+  bool hasBookHeader() => _bookHeader != null;
+
   void _initializeFields() {
     _bookName = snapshotData['BookName'] as String?;
     _bookPath = snapshotData['BookPath'] as String?;
     _bookURL = snapshotData['BookURL'] as String?;
+    _bookContent = snapshotData['BookContent'] as String?;
+    _bookHeader = snapshotData['BookHeader'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -73,12 +85,16 @@ Map<String, dynamic> createBookRecordData({
   String? bookName,
   String? bookPath,
   String? bookURL,
+  String? bookContent,
+  String? bookHeader,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'BookName': bookName,
       'BookPath': bookPath,
       'BookURL': bookURL,
+      'BookContent': bookContent,
+      'BookHeader': bookHeader,
     }.withoutNulls,
   );
 
@@ -92,12 +108,14 @@ class BookRecordDocumentEquality implements Equality<BookRecord> {
   bool equals(BookRecord? e1, BookRecord? e2) {
     return e1?.bookName == e2?.bookName &&
         e1?.bookPath == e2?.bookPath &&
-        e1?.bookURL == e2?.bookURL;
+        e1?.bookURL == e2?.bookURL &&
+        e1?.bookContent == e2?.bookContent &&
+        e1?.bookHeader == e2?.bookHeader;
   }
 
   @override
-  int hash(BookRecord? e) =>
-      const ListEquality().hash([e?.bookName, e?.bookPath, e?.bookURL]);
+  int hash(BookRecord? e) => const ListEquality().hash(
+      [e?.bookName, e?.bookPath, e?.bookURL, e?.bookContent, e?.bookHeader]);
 
   @override
   bool isValidKey(Object? o) => o is BookRecord;
